@@ -1,35 +1,27 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-let listProduct = [
-    {
-        id: 0,
-        name: 'product 1',
-        price: '2000',
-        quantity: 5,
-        image: 'https://satovietnhat.com.vn/Upload/images/huong-dan-lam-banh-mi-thom-ngon-bang-noi-com-dien-1.jpg'
-    },
-    {
-        id: 1,
-        name: 'product 2',
-        price: '2000',
-        quantity: 5,
-        image: 'https://satovietnhat.com.vn/Upload/images/huong-dan-lam-banh-mi-thom-ngon-bang-noi-com-dien-1.jpg'
-    }
-];
+const product_1 = require("../entity/product");
+const mongoose_1 = require("mongoose");
+const ObjectId = mongoose_1.Types.ObjectId;
 class ProductService {
     constructor() {
-    }
-    getAll() {
-        return listProduct;
-    }
-    addProduct(product) {
-        this.getAll().push(product);
-    }
-    deleteProduct(id) {
-        this.getAll().splice(id, 1);
-    }
-    updateProduct(id, updateProduct) {
-        this.getAll()[id] = updateProduct;
+        this.getAll = async () => {
+            let products = await product_1.Product.find();
+            return products;
+        };
+        this.addProduct = async (product) => {
+            await product_1.Product.create(product);
+        };
+        this.findById = async (id) => {
+            let product = await product_1.Product.find({ _id: new ObjectId(`${id}`) });
+            return product[0];
+        };
+        this.deleteProductMongoo = async (id) => {
+            await product_1.Product.deleteOne({ _id: new ObjectId(`${id}`) });
+        };
+        this.updateProductMongoo = async (id, updateProduct) => {
+            product_1.Product.updateOne({ _id: new ObjectId(`${id}`) }, { $set: { name: `${updateProduct.name}`, price: { price: `${updateProduct.price}` }, quantity: `${updateProduct.quantity}`, image: `${updateProduct.image}` } });
+        };
     }
 }
 exports.default = new ProductService();

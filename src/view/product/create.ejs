@@ -159,11 +159,6 @@
                 <div class="contact-form">
                     <div id="success"></div>
                     <form method="post">
-                        <% let id = length%>
-                        <div class="control-group">
-                            <input type="text" class="form-control" name="id" value="<%=id%>" id="id" placeholder="product id"
-                                   required="required"/>
-                        </div>
                         <div class="control-group">
                             <input type="text" class="form-control" name="name" id="name" placeholder="product name"
                                 required="required"/>
@@ -174,7 +169,7 @@
 
                         </div>
                         <div class="control-group">
-                            <input type="number" class="form-control" id="quantity" placeholder="quantity"
+                            <input type="number" class="form-control" id="quantity" placeholder="quantity" name="quantity"
                                 required="required" />
 
                         </div>

@@ -213,10 +213,10 @@
                 </a>
                 <h5 class="font-weight-semi-bold m-0"><%=product.name%></h5>
                 <form action="" method="post">
-                    <button name="idDelete" value="<%=product.id%>">Delete</button>
+                    <button name="idDelete" value="<%=product._id.toString()%>">Delete</button>
                 </form>
                 <form action="" method="post">
-                    <button><a href="/update/<%=product.id%>">Update</a></button>
+                    <button><a href="/update/<%=product._id.toString()%>">Update</a></button>
                 </form>
             </div>
         </div>

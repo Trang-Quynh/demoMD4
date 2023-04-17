@@ -1,43 +1,28 @@
-let listProduct = [
-    {
-        id:0,
-        name: 'product 1',
-        price: '2000',
-        quantity: 5,
-        image: 'https://satovietnhat.com.vn/Upload/images/huong-dan-lam-banh-mi-thom-ngon-bang-noi-com-dien-1.jpg'
-    },
-    {
-        id:1,
-        name: 'product 2',
-        price: '2000',
-        quantity: 5,
-        image: 'https://satovietnhat.com.vn/Upload/images/huong-dan-lam-banh-mi-thom-ngon-bang-noi-com-dien-1.jpg'
-    }
-]
+import {Product} from "../entity/product";
+import { Types } from 'mongoose';
+const ObjectId = Types.ObjectId;
+
 class ProductService{
     constructor() {
     }
 
 
-    getAll(){
-        return listProduct
+    getAll = async () => {
+        let products = await Product.find();
+        return products;
     }
-
-    addProduct(product){
-        this.getAll().push(product)
+    addProduct = async (product) => {
+       await Product.create(product)
     }
-
-
-    deleteProduct(id){
-        this.getAll().splice(id,1)
+    findById = async (id) =>{
+        let product = await Product.find( {_id: new ObjectId(`${id}`)});
+        return product[0];
     }
-
-    updateProduct(id, updateProduct){
-        this.getAll()[id] = updateProduct
+    deleteProductMongoo = async (id) =>{
+        await Product.deleteOne( {_id: new ObjectId(`${id}`)});
     }
-
-
-
-
+    updateProductMongoo = async (id, updateProduct) =>{
+        Product.updateOne({_id: new ObjectId(`${id}`)}, {$set: {name: `${updateProduct.name}`, price: {price: `${updateProduct.price}`}, quantity:`${updateProduct.quantity}`, image: `${updateProduct.image}`}})
+    }
 }
 export default new ProductService();

@@ -6,44 +6,41 @@ class ProductController{
     constructor() {
         this.productService = productService
     }
-    findAll = (req:Request, res:Response) =>{
-        let products = this.productService.getAll()
+    findAll = async (req:Request, res:Response) =>{
+        let products = await this.productService.getAll()
+        // products.map(item =>{
+        //     console.log(item._id.toString())
+        // })
         res.render('index', {products: products});
     }
-    deleteProduct = (req:Request, res:Response) =>{
-        let id = req.body.idDelete;
-        this.productService.deleteProduct(id);
-        res.redirect(301, '/products')
-    }
-
-    showFormAdd = (req:Request, res:Response) =>{
-        let productListLength = this.productService.getAll().length
+    showFormAdd = async (req:Request, res:Response) =>{
+        let productListLength = await this.productService.getAll().length
         res.render('product/create', {length:productListLength});
     }
 
-    addProduct = (req:Request, res:Response) =>{
-        this.productService.addProduct(req.body);
+    addProduct = async (req:Request, res:Response) =>{
+        await this.productService.addProduct(req.body);
         res.redirect(301, '/products')
     }
 
-    showFormEdit = (req:Request, res:Response) =>{
+    deleteProduct = async (req:Request, res:Response) =>{
+        let id = req.body.idDelete;
+        console.log(id)
+        await this.productService.deleteProductMongoo(id);
+        res.redirect(301, '/products')
+    }
+
+    showFormEdit = async (req:Request, res:Response) =>{
+        let id = req.params.id
+        res.render('product/edit', {product: await this.productService.findById(id)});
+    }
+
+    updateProduct = async (req:Request, res:Response) =>{
         let id = req.params.id
         console.log(id)
-        let product;
-        for (let i = 0; i < this.productService.getAll().length; i++) {
-            if(this.productService.getAll()[i].id == id){
-                product = this.productService.getAll()[i];
-            }
-        }
-        console.log(product)
-        // thay vao trong file edit
-        res.render('product/edit', {product: product});
-    }
-
-    updateProduct = (req:Request, res:Response) =>{
-        let id = req.params.id
         let updateProduct = req.body
-        this.productService.updateProduct(id,updateProduct);
+        console.log(updateProduct)
+        await this.productService.updateProductMongoo(id,updateProduct);
         res.redirect(301, '/products')
     }
 
@@ -51,9 +48,6 @@ class ProductController{
 
 
 
-// app.get('user/:userid', (req, res) => {
-//     console.log(req.params.userid) // "123"
-// })
 
 
 }

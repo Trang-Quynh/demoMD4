@@ -6,39 +6,34 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const productService_1 = __importDefault(require("../service/productService"));
 class ProductController {
     constructor() {
-        this.findAll = (req, res) => {
-            let products = this.productService.getAll();
+        this.findAll = async (req, res) => {
+            let products = await this.productService.getAll();
             res.render('index', { products: products });
         };
-        this.deleteProduct = (req, res) => {
-            let id = req.body.idDelete;
-            this.productService.deleteProduct(id);
-            res.redirect(301, '/products');
-        };
-        this.showFormAdd = (req, res) => {
-            let productListLength = this.productService.getAll().length;
+        this.showFormAdd = async (req, res) => {
+            let productListLength = await this.productService.getAll().length;
             res.render('product/create', { length: productListLength });
         };
-        this.addProduct = (req, res) => {
-            this.productService.addProduct(req.body);
+        this.addProduct = async (req, res) => {
+            await this.productService.addProduct(req.body);
             res.redirect(301, '/products');
         };
-        this.showFormEdit = (req, res) => {
+        this.deleteProduct = async (req, res) => {
+            let id = req.body.idDelete;
+            console.log(id);
+            await this.productService.deleteProductMongoo(id);
+            res.redirect(301, '/products');
+        };
+        this.showFormEdit = async (req, res) => {
+            let id = req.params.id;
+            res.render('product/edit', { product: await this.productService.findById(id) });
+        };
+        this.updateProduct = async (req, res) => {
             let id = req.params.id;
             console.log(id);
-            let product;
-            for (let i = 0; i < this.productService.getAll().length; i++) {
-                if (this.productService.getAll()[i].id == id) {
-                    product = this.productService.getAll()[i];
-                }
-            }
-            console.log(product);
-            res.render('product/edit', { product: product });
-        };
-        this.updateProduct = (req, res) => {
-            let id = req.params.id;
             let updateProduct = req.body;
-            this.productService.updateProduct(id, updateProduct);
+            console.log(updateProduct);
+            await this.productService.updateProductMongoo(id, updateProduct);
             res.redirect(301, '/products');
         };
         this.productService = productService_1.default;
