@@ -21,16 +21,16 @@
 /// <reference types="mongoose/types/utility" />
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
+/// <reference types="mongoose" />
 /// <reference types="mongoose/types/inferschematype" />
-import { Types } from 'mongoose';
 declare class ProductService {
     constructor();
     getAll: () => Promise<(import("mongoose").Document<unknown, {}, import("../entity/product").IProduct> & Omit<import("../entity/product").IProduct & {
-        _id: Types.ObjectId;
+        _id: import("mongoose").Types.ObjectId;
     }, never>)[]>;
     addProduct: (product: any) => Promise<void>;
     findById: (id: any) => Promise<import("mongoose").Document<unknown, {}, import("../entity/product").IProduct> & Omit<import("../entity/product").IProduct & {
-        _id: Types.ObjectId;
+        _id: import("mongoose").Types.ObjectId;
     }, never>>;
     deleteProductMongoo: (id: any) => Promise<void>;
     updateProductMongoo: (id: any, updateProduct: any) => Promise<void>;

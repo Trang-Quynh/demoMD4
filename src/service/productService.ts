@@ -1,8 +1,7 @@
 import {Product} from "../entity/product";
-import { Types } from 'mongoose';
-const ObjectId = Types.ObjectId;
 
-class ProductService{
+
+class ProductService {
     constructor() {
     }
 
@@ -12,17 +11,18 @@ class ProductService{
         return products;
     }
     addProduct = async (product) => {
-       await Product.create(product)
+        await Product.create(product)
     }
-    findById = async (id) =>{
-        let product = await Product.find( {_id: new ObjectId(`${id}`)});
+    findById = async (id) => {
+        let product = await Product.find({_id: `${id}`});
         return product[0];
     }
-    deleteProductMongoo = async (id) =>{
-        await Product.deleteOne( {_id: new ObjectId(`${id}`)});
+    deleteProductMongoo = async (id) => {
+        await Product.deleteOne({_id: `${id}`});
     }
-    updateProductMongoo = async (id, updateProduct) =>{
-        Product.updateOne({_id: new ObjectId(`${id}`)}, {$set: {name: `${updateProduct.name}`, price: {price: `${updateProduct.price}`}, quantity:`${updateProduct.quantity}`, image: `${updateProduct.image}`}})
+    updateProductMongoo = async (id, updateProduct) => {
+       await Product.updateOne({_id: id}, updateProduct)
     }
 }
+
 export default new ProductService();
