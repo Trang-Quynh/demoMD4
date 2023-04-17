@@ -21,7 +21,7 @@ class ProductService {
         await Product.deleteOne({_id: `${id}`});
     }
     updateProductMongoo = async (id, updateProduct) => {
-       await Product.updateOne({_id: id}, updateProduct)
+        await Product.updateOne({_id: id}, updateProduct)
     }
 }
 
