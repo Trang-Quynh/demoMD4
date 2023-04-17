@@ -25,15 +25,15 @@
 /// <reference types="mongoose/types/inferschematype" />
 declare class ProductService {
     constructor();
-    getAll: () => Promise<(import("mongoose").Document<unknown, {}, import("../entity/product").IProduct> & Omit<import("../entity/product").IProduct & {
+    getAll: () => Promise<(import("mongoose").Document<unknown, any, import("../entity/product").IProduct> & Omit<import("../entity/product").IProduct & {
         _id: import("mongoose").Types.ObjectId;
     }, never>)[]>;
     addProduct: (product: any) => Promise<void>;
-    findById: (id: any) => Promise<import("mongoose").Document<unknown, {}, import("../entity/product").IProduct> & Omit<import("../entity/product").IProduct & {
+    findById: (id: any) => Promise<import("mongoose").Document<unknown, any, import("../entity/product").IProduct> & Omit<import("../entity/product").IProduct & {
         _id: import("mongoose").Types.ObjectId;
     }, never>>;
     deleteProductMongoo: (id: any) => Promise<void>;
-    updateProductMongoo: (id: any, updateProduct: any) => Promise<void>;
+    updateProduct: (id: any, updateProduct: any) => Promise<void>;
 }
 declare const _default: ProductService;
 export default _default;

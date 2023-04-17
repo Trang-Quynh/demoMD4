@@ -15,6 +15,7 @@ app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use('', router_1.default);
 const url = 'mongodb://127.0.0.1:27017/demo_C12';
+mongoose_1.default.set('strictQuery', true);
 mongoose_1.default.connect(url).then(() => {
     console.log('connect success');
 }).catch((err) => {

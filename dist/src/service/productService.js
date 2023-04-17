@@ -17,7 +17,7 @@ class ProductService {
         this.deleteProductMongoo = async (id) => {
             await product_1.Product.deleteOne({ _id: `${id}` });
         };
-        this.updateProductMongoo = async (id, updateProduct) => {
+        this.updateProduct = async (id, updateProduct) => {
             await product_1.Product.updateOne({ _id: id }, updateProduct);
         };
     }

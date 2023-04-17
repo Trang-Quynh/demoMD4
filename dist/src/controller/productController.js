@@ -30,9 +30,8 @@ class ProductController {
         };
         this.updateProduct = async (req, res) => {
             let id = req.params.id;
-            console.log(id);
             let updateProduct = req.body;
-            await this.productService.updateProductMongoo(id, updateProduct);
+            this.productService.updateProduct(id, updateProduct);
             res.redirect(301, '/products');
         };
         this.productService = productService_1.default;

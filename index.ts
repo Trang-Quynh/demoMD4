@@ -12,6 +12,7 @@ app.use('', router)
 
 const url = 'mongodb://127.0.0.1:27017/demo_C12'
 //"mongodb://127.0.0.1:27017/test";
+mongoose.set('strictQuery', true);
 mongoose.connect(url).then(()=>{
     console.log('connect success')
 }).catch((err)=>{
