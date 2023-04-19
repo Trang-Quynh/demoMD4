@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 declare class ProductController {
     private productService;
+    private categoryService;
     constructor();
-    findAll: (req: Request, res: Response) => Promise<void>;
+    showList: (req: Request, res: Response) => Promise<void>;
     showFormAdd: (req: Request, res: Response) => Promise<void>;
     addProduct: (req: Request, res: Response) => Promise<void>;
     deleteProduct: (req: Request, res: Response) => Promise<void>;

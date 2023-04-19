@@ -25,10 +25,13 @@
 /// <reference types="mongoose/types/inferschematype" />
 declare class ProductService {
     constructor();
-    getAll: () => Promise<(import("mongoose").Document<unknown, any, import("../entity/product").IProduct> & Omit<import("../entity/product").IProduct & {
+    getAll: (limit: any, offset: any) => Promise<Omit<import("mongoose").Document<unknown, any, import("../entity/product").IProduct> & Omit<import("../entity/product").IProduct & {
         _id: import("mongoose").Types.ObjectId;
-    }, never>)[]>;
+    }, never>, never>[]>;
     addProduct: (product: any) => Promise<void>;
+    findByKeywordMongoo: (keyword: any, limit: any, offset: any) => Promise<Omit<import("mongoose").Document<unknown, any, import("../entity/product").IProduct> & Omit<import("../entity/product").IProduct & {
+        _id: import("mongoose").Types.ObjectId;
+    }, never>, never>[]>;
     findById: (id: any) => Promise<import("mongoose").Document<unknown, any, import("../entity/product").IProduct> & Omit<import("../entity/product").IProduct & {
         _id: import("mongoose").Types.ObjectId;
     }, never>>;

@@ -11,6 +11,13 @@ const app = (0, express_1.default)();
 app.set('views', './src/view');
 app.set('view engine', 'ejs');
 app.use(express_1.default.static('./public'));
+const express_session_1 = __importDefault(require("express-session"));
+app.use((0, express_session_1.default)({
+    resave: true,
+    saveUninitialized: true,
+    secret: 'somesecret',
+    cookie: { maxAge: 60000 }
+}));
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use('', router_1.default);

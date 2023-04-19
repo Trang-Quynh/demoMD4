@@ -6,7 +6,11 @@ const ProductSchema = new mongoose_1.Schema({
     name: String,
     price: Number,
     quantity: Number,
-    image: String
+    image: String,
+    category: {
+        type: String,
+        ref: 'Category'
+    }
 });
 const Product = (0, mongoose_1.model)('Product', ProductSchema);
 exports.Product = Product;

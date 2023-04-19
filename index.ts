@@ -6,12 +6,16 @@ const app = express();
 app.set('views','./src/view');
 app.set('view engine', 'ejs')
 app.use(express.static('./public'))
+import session from "express-session";
+app.use(session({
+    resave: true,
+    saveUninitialized: true,
+    secret: 'somesecret',
+    cookie: { maxAge: 60000 }}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use('', router)
-
 const url = 'mongodb://127.0.0.1:27017/demo_C12'
-//"mongodb://127.0.0.1:27017/test";
 mongoose.set('strictQuery', true);
 mongoose.connect(url).then(()=>{
     console.log('connect success')
