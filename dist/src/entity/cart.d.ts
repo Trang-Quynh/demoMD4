@@ -28,7 +28,11 @@ export interface ICart {
     cart_items: [
         {
             product_id: string;
+            price: number;
+            image: string;
+            name: string;
             quantity: number;
+            total_price_product: number;
         }
     ];
     total_price: number;

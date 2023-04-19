@@ -11,6 +11,7 @@ declare class UserController {
     showFormSignup: (req: Request, res: Response) => Promise<void>;
     signup: (req: Request, res: Response) => Promise<void>;
     showShoppingCart: (req: Request, res: Response) => Promise<void>;
+    deleteACart_items: (req: Request, res: Response) => Promise<void>;
 }
 declare const _default: UserController;
 export default _default;

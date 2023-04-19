@@ -34,13 +34,19 @@ class UserService {
             else {
                 cartItem = {
                     product_id: product_id,
-                    quantity: 1
+                    price: product['price'],
+                    image: product['image'],
+                    name: product['name'],
+                    quantity: 1,
+                    total_price_product: 0,
                 };
+                cartItem.total_price_product = cartItem.quantity * product['price'];
                 cart['cart_items'].push(cartItem);
             }
             let total_price = 0;
             for (const item of cart['cart_items']) {
                 if (product) {
+                    total_price += item.price * item.quantity;
                 }
             }
             cart['total_price'] = total_price;
@@ -52,9 +58,27 @@ class UserService {
                 console.log(err);
             });
         };
-        this.getAllProductByUserId = async (user) => {
-            let createdUser = await user_1.User.create(user);
-            return createdUser;
+        this.deleteItem = async (user_id, cartItem_id) => {
+            console.log(cartItem_id);
+            const cart = await cart_1.Cart.findOne({ user_id: user_id });
+            console.log('before' + cart['cart_items']);
+            await cart['cart_items'].map((value, index) => {
+                if (cart['cart_items'][index]['_id'] == cartItem_id) {
+                    cart['cart_items'].splice(index, 1);
+                }
+            });
+            let total_price = 0;
+            for (const item of cart['cart_items']) {
+                total_price += item.price * item.quantity;
+            }
+            cart['total_price'] = total_price;
+            await cart_1.Cart.updateOne({ _id: cart['_id'] }, {
+                $set: cart
+            }).then(() => {
+                console.log('update success');
+            }).catch((err) => {
+                console.log(err);
+            });
         };
     }
 }

@@ -1,17 +1,13 @@
-import {Request, Response, Router} from "express";
-import productController from "../controller/productController";
-import userController from "../controller/userController";
+import { Router} from "express";
 import productRouter from "./productRouter";
 import userRouter from "./userRouter";
+import guestController from "../controller/guestController";
 
 const router = Router();
 router.use('/products', productRouter)
 router.use('/users', userRouter)
+router.use('/banrau', guestController.findAll)
 
 
 
-// app.get('user/', (req, res) => {
-//     console.log(req.query.userID) // "123"
-//     console.log(req.query.action) // "changeProfile"
-// })
 export default router;

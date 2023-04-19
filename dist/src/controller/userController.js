@@ -77,10 +77,14 @@ class UserController {
         };
         this.showShoppingCart = async (req, res) => {
             let user_id = req.session['user']._id;
-            console.log(user_id);
             let cart = await this.userService.findCartByUserId(user_id);
-            console.log(cart);
             res.render('user/shoppingCart', { cart: cart });
+        };
+        this.deleteACart_items = async (req, res) => {
+            let user_id = req.session['user']._id;
+            let cartItem_id = req.body.idDelete;
+            await this.userService.deleteItem(user_id, cartItem_id);
+            res.redirect(301, '/users/shoppingCart');
         };
         this.userService = userService_1.default;
         this.cartService = cartService_1.default;

@@ -14,9 +14,7 @@ declare class UserService {
         _id: mongoose.Types.ObjectId;
     }, never>>;
     addToCart: (user_id: any, product_id: any) => Promise<void>;
-    getAllProductByUserId: (user: any) => Promise<mongoose.Document<unknown, any, import("../entity/user").IUser> & Omit<import("../entity/user").IUser & {
-        _id: mongoose.Types.ObjectId;
-    }, never>>;
+    deleteItem: (user_id: any, cartItem_id: any) => Promise<void>;
 }
 declare const _default: UserService;
 export default _default;

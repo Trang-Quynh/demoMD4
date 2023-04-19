@@ -16,7 +16,7 @@ app.use((0, express_session_1.default)({
     resave: true,
     saveUninitialized: true,
     secret: 'somesecret',
-    cookie: { maxAge: 60000 }
+    cookie: { maxAge: 604800000 }
 }));
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: true }));

@@ -13,5 +13,6 @@ userRouter.post('/login', userController_1.default.login);
 userRouter.get('/signup', userController_1.default.showFormSignup);
 userRouter.post('/signup', userController_1.default.signup);
 userRouter.get('/shoppingCart', userController_1.default.showShoppingCart);
+userRouter.post('/shoppingCart', userController_1.default.deleteACart_items);
 exports.default = userRouter;
 //# sourceMappingURL=userRouter.js.map

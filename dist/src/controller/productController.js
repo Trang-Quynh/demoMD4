@@ -31,7 +31,7 @@ class ProductController {
                 }
             }
             else {
-                res.redirect(301, '/user/login');
+                res.redirect(301, '/users/login');
             }
         };
         this.showFormAdd = async (req, res) => {

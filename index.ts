@@ -11,7 +11,7 @@ app.use(session({
     resave: true,
     saveUninitialized: true,
     secret: 'somesecret',
-    cookie: { maxAge: 60000 }}));
+    cookie: { maxAge: 604800000 }}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use('', router)

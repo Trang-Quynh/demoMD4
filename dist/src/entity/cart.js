@@ -6,7 +6,11 @@ const CartSchema = new mongoose_1.Schema({
     user_id: { type: String, ref: 'User' },
     cart_items: [{
             product_id: { type: String, ref: 'Product' },
+            price: { type: Number, ref: 'Product.price' },
+            image: { type: String, ref: 'Product.image' },
+            name: { type: String, ref: 'Product.name' },
             quantity: Number,
+            total_price_product: Number,
         }],
     total_price: Number
 });

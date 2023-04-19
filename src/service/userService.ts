@@ -40,16 +40,19 @@ class UserService {
         } else {
             cartItem = {
                 product_id: product_id,
-                quantity: 1
+                price: product['price'],
+                image: product['image'],
+                name: product['name'],
+                quantity: 1,
+                total_price_product:0,
             };
+            cartItem.total_price_product = cartItem.quantity * product['price'];
             cart['cart_items'].push(cartItem);
         }
-
         let total_price:number = 0;
         for (const item of cart['cart_items']) {
             if (product) {
-                // total_price += item.product_id * item.quantity;
-
+                total_price += item.price * item.quantity;
             }
         }
         cart['total_price'] = total_price;
@@ -64,31 +67,36 @@ class UserService {
             console.log(err)
         })
     }
+    deleteItem = async (user_id, cartItem_id)=>{
+        console.log(cartItem_id)
+        const cart = await Cart.findOne({user_id: user_id});
+        console.log('before' + cart['cart_items'])
+        await cart['cart_items'].map((value, index)=>{
+            if(cart['cart_items'][index]['_id'] == cartItem_id){
+                cart['cart_items'].splice(index, 1)
+            }
+        })
+        let total_price:number = 0;
+        for (const item of cart['cart_items']) {
+                total_price += item.price * item.quantity;
+        }
+        cart['total_price'] = total_price;
 
-    getAllProductByUserId = async (user)=>{
-        let createdUser = await User.create(user)
-        return createdUser
+        await Cart.updateOne(
+            { _id: cart['_id'] },
+            {
+                $set: cart
+            }
+        ).then(()=>{
+            console.log('update success')
+        }).catch((err)=>{
+            console.log(err)
+        })
+
     }
+
+
 
 }
 
 export default new UserService();
-
-//
-// {
-//     _id: new ObjectId("643f693068cf61e2a489d636"),
-//         user_id: '643f693068cf61e2a489d634',
-//     cart_items: [],
-//     total_price: 0,
-//     __v: 0
-// }
-// {
-//     _id: new ObjectId("643cf952ebb46b38776e81dc"),
-//         name: 'trang1',
-//     price: 5000,
-//     image: 'https://firebasestorage.googleapis.com/v0/b/crud-8adf5.appspot.com/o/images%2Ftomato.jpg?alt=media&token=714b892b-4517-4a7d-aa71-fb12af2ee720'
-//     ,
-//     __v: 0,
-//     quantity: 3,
-//     category: '643e5a325ad72f675403b78a'
-// }

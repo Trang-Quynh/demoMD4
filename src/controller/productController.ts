@@ -11,11 +11,6 @@ class ProductController{
     }
 
 
-    // findAll = async (req:Request, res:Response) =>{
-    //     let products = await this.productService.getAll()
-    //     res.render('index', {products: products});
-    // }
-
 
 
     showList = async (req:Request, res:Response) =>{
@@ -39,7 +34,7 @@ class ProductController{
                   res.render('index' , {products:products});
               }
           }else{
-              res.redirect(301, '/user/login')
+              res.redirect(301, '/users/login')
           }
     }
 
