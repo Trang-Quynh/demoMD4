@@ -27,7 +27,6 @@ class UserController{
                 res.redirect(301, '/products')
             }else{
                 req.session['user'] = user;
-                console.log(req.session['user']._id)
                 res.redirect(301, `/users`)
             }
         }
@@ -59,12 +58,11 @@ class UserController{
     }
 
     addNewProduct = async (req:Request, res:Response) =>{
-        //them san pham moi vao gio hang
+        let product_id = req.body.product_id;
+        let user_id = req.session['user']._id
+        await this.userService.addToCart(user_id, product_id);
         res.redirect(301, `/users`)
     }
-
-
-
 
 
     showFormSignup = async (req:Request, res:Response) =>{
@@ -79,12 +77,17 @@ class UserController{
         }catch (err){
             console.log(err.message)
         }
-        res.redirect(301, '/user/login');
+        res.redirect(301, '/users/login');
     }
 
     showShoppingCart = async (req:Request, res:Response) =>{
         //lay product list tu gio hang
-        res.render('user/shoppingCart');
+        let user_id = req.session['user']._id;
+        console.log(user_id)
+        //tim shopping cart theo user_id
+        let cart = await this.userService.findCartByUserId(user_id);
+        console.log(cart)
+        res.render('user/shoppingCart', {cart:cart});
     }
 
 

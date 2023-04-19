@@ -23,19 +23,15 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
 import { Schema } from 'mongoose';
-declare const Cart: import("mongoose").Model<{
-    user_id: import("mongoose").Types.ObjectId;
-    cart_items: {
-        quantity: number;
-        product_id: import("mongoose").Types.ObjectId;
-    }[];
+export interface ICart {
+    user_id: string;
+    cart_items: [
+        {
+            product_id: string;
+            quantity: number;
+        }
+    ];
     total_price: number;
-}, {}, {}, {}, Schema<any, import("mongoose").Model<any, any, any, any, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, {
-    user_id: import("mongoose").Types.ObjectId;
-    cart_items: {
-        quantity: number;
-        product_id: import("mongoose").Types.ObjectId;
-    }[];
-    total_price: number;
-}>>;
+}
+declare const Cart: import("mongoose").Model<ICart, {}, {}, {}, Schema<ICart, import("mongoose").Model<ICart, any, any, any, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, ICart>>;
 export { Cart };

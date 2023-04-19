@@ -23,7 +23,6 @@ class UserController {
                 }
                 else {
                     req.session['user'] = user;
-                    console.log(req.session['user']._id);
                     res.redirect(301, `/users`);
                 }
             }
@@ -53,8 +52,14 @@ class UserController {
                 }
             }
             else {
-                res.redirect(301, '/user/login');
+                res.redirect(301, '/users/login');
             }
+        };
+        this.addNewProduct = async (req, res) => {
+            let product_id = req.body.product_id;
+            let user_id = req.session['user']._id;
+            await this.userService.addToCart(user_id, product_id);
+            res.redirect(301, `/users`);
         };
         this.showFormSignup = async (req, res) => {
             res.render('user/signup');
@@ -68,10 +73,14 @@ class UserController {
             catch (err) {
                 console.log(err.message);
             }
-            res.redirect(301, '/user/login');
+            res.redirect(301, '/users/login');
         };
         this.showShoppingCart = async (req, res) => {
-            res.render('user/shoppingCart');
+            let user_id = req.session['user']._id;
+            console.log(user_id);
+            let cart = await this.userService.findCartByUserId(user_id);
+            console.log(cart);
+            res.render('user/shoppingCart', { cart: cart });
         };
         this.userService = userService_1.default;
         this.cartService = cartService_1.default;

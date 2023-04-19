@@ -7,6 +7,7 @@ declare class UserController {
     showFormLogin: (req: Request, res: Response) => Promise<void>;
     login: (req: Request, res: Response) => Promise<void>;
     showList: (req: Request, res: Response) => Promise<void>;
+    addNewProduct: (req: Request, res: Response) => Promise<void>;
     showFormSignup: (req: Request, res: Response) => Promise<void>;
     signup: (req: Request, res: Response) => Promise<void>;
     showShoppingCart: (req: Request, res: Response) => Promise<void>;
