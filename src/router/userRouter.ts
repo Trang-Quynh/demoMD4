@@ -9,7 +9,6 @@ userRouter.post('/login', userController.login);
 userRouter.get('/signup', userController.showFormSignup);
 userRouter.post('/signup', userController.signup);
 userRouter.get('/shoppingCart', userController.showShoppingCart);
-userRouter.post('/shoppingCart', userController.deleteACart_items);
-
-
+userRouter.post('/shoppingCart', userController.shoppingCartPost);
+userRouter.get('/shoppingHistory', userController.shoppingHistoryGet);
 export default userRouter

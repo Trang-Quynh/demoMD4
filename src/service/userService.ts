@@ -1,7 +1,8 @@
 import {User} from "../entity/user";
 import {Product} from "../entity/product";
 import {Cart} from "../entity/cart";
-import mongoose from "mongoose";
+import {History} from "../entity/history";
+
 
 
 class UserService {
@@ -34,6 +35,7 @@ class UserService {
         if (!product) {
             throw new Error('Product not found');
         }
+
         let cartItem = cart['cart_items'].find(item => item.product_id == product_id);
         if (cartItem) {
             cartItem.quantity += 1;
@@ -49,6 +51,8 @@ class UserService {
             cartItem.total_price_product = cartItem.quantity * product['price'];
             cart['cart_items'].push(cartItem);
         }
+
+
         let total_price:number = 0;
         for (const item of cart['cart_items']) {
             if (product) {
@@ -68,9 +72,7 @@ class UserService {
         })
     }
     deleteItem = async (user_id, cartItem_id)=>{
-        console.log(cartItem_id)
         const cart = await Cart.findOne({user_id: user_id});
-        console.log('before' + cart['cart_items'])
         await cart['cart_items'].map((value, index)=>{
             if(cart['cart_items'][index]['_id'] == cartItem_id){
                 cart['cart_items'].splice(index, 1)
@@ -94,6 +96,22 @@ class UserService {
         })
 
     }
+
+    findPaidCartByUserId = async (user_id)=>{
+        let carts = await History.find({user_id: user_id}).populate('Cart');
+        console.log(carts)
+    }
+
+    // products = await Product.find({ name: { $regex: `${keyword}`, $options: 'i' } }).populate('category')
+
+
+
+
+
+
+
+
+
 
 
 

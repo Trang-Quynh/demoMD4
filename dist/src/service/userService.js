@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const user_1 = require("../entity/user");
 const product_1 = require("../entity/product");
 const cart_1 = require("../entity/cart");
+const history_1 = require("../entity/history");
 class UserService {
     constructor() {
         this.getAll = async () => {
@@ -59,9 +60,7 @@ class UserService {
             });
         };
         this.deleteItem = async (user_id, cartItem_id) => {
-            console.log(cartItem_id);
             const cart = await cart_1.Cart.findOne({ user_id: user_id });
-            console.log('before' + cart['cart_items']);
             await cart['cart_items'].map((value, index) => {
                 if (cart['cart_items'][index]['_id'] == cartItem_id) {
                     cart['cart_items'].splice(index, 1);
@@ -79,6 +78,10 @@ class UserService {
             }).catch((err) => {
                 console.log(err);
             });
+        };
+        this.findPaidCartByUserId = async (user_id) => {
+            let carts = await history_1.History.find({ user_id: user_id }).populate('Cart');
+            console.log(carts);
         };
     }
 }

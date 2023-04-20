@@ -58,11 +58,11 @@ class UserController{
 
     addNewProduct = async (req:Request, res:Response) =>{
         let product_id = req.body.product_id;
+        console.log(product_id)
         let user_id = req.session['user']._id
         await this.userService.addToCart(user_id, product_id);
         res.redirect(301, `/users`)
     }
-
 
     showFormSignup = async (req:Request, res:Response) =>{
         res.render('user/signup');
@@ -72,7 +72,7 @@ class UserController{
         let user = req.body;
         try{
            let currentUser =  await this.userService.createUser(user);
-           await this.cartService.createNewCart(currentUser);
+           await this.cartService.createNewCart(currentUser._id);
         }catch (err){
             console.log(err.message)
         }
@@ -82,15 +82,48 @@ class UserController{
     showShoppingCart = async (req:Request, res:Response) =>{
         let user_id = req.session['user']._id;
         let cart = await this.userService.findCartByUserId(user_id);
-        res.render('user/shoppingCart', {cart:cart});
+        console.log(cart)
+            res.render('user/shoppingCart', {cart:cart});
     }
 
-    deleteACart_items = async (req:Request, res:Response) =>{
-        let user_id = req.session['user']._id;
-        let cartItem_id = req.body.idDelete
+    deleteACart_items = async (req:Request, res:Response, user_id, cartItem_id) =>{
         await this.userService.deleteItem(user_id, cartItem_id)
         res.redirect(301,'/users/shoppingCart');
     }
+
+    paidCart = async (req:Request, res:Response, user_id, cartId) =>{
+        await cartService.removeToHistory(user_id, cartId)
+        res.redirect(301,'/users/shoppingCart');
+    }
+
+    shoppingCartPost = async (req:Request, res:Response) =>{
+        let user_id = req.session['user']._id;
+        let cartItem_id = req.body.idDelete
+        let cartId = req.body.cartId
+        // console.log('cartItem_id' + cartItem_id)
+        // console.log('cartId' + cartId)
+        // console.log('userId' + user_id)
+        if(cartItem_id){
+            await this.deleteACart_items(req,res, user_id, cartItem_id)
+        }else if(cartId){
+            await this.paidCart(req,res,user_id,cartId)
+        }
+    }
+
+    shoppingHistoryGet = async (req:Request, res:Response) =>{
+        let user_id = req.session['user']._id;
+        let carts = await this.userService.findPaidCartByUserId(user_id);
+        console.log(carts)
+        // res.render('user/history');
+    }
+
+
+
+
+
+
+
+
 
 
 }

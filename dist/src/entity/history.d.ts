@@ -23,20 +23,9 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
 import { Schema } from 'mongoose';
-export interface ICart {
-    user_id: string;
-    cart_items: [
-        {
-            product_id: string;
-            price: number;
-            image: string;
-            name: string;
-            quantity: number;
-            total_price_product: number;
-        }
-    ];
-    total_price: number;
-    paymentStatus: string;
+import { ICart } from "./cart";
+export interface IHistory {
+    cart_id: ICart;
 }
-declare const Cart: import("mongoose").Model<ICart, {}, {}, {}, Schema<ICart, import("mongoose").Model<ICart, any, any, any, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, ICart>>;
-export { Cart };
+declare const History: import("mongoose").Model<IHistory, {}, {}, {}, Schema<IHistory, import("mongoose").Model<IHistory, any, any, any, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, IHistory>>;
+export { History };

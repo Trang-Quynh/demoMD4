@@ -96,9 +96,7 @@
                     </div>
                     <div id="myNav" class="overlay">
                         <div class="overlay-content">
-                            <a href="/users">HOME</a>
-                            <a href="/users/shoppingHistory">SHOPPING HISTORY</a>
-                            <a href="/users/login">LOGOUT</a>
+                            <a href="/users">BACK TO SHOPPING</a>
                         </div>
                     </div>
                 </div>
@@ -113,15 +111,15 @@
     <div class="container">
         <div class="heading_container">
             <h2>
-                Shopping <span>Cart</span>
+                Shopping <span>History</span>
             </h2>
         </div>
         <div class="container px-3 my-5 clearfix">
             <!-- Shopping cart table -->
+
+
+
             <div class="card">
-                <div class="card-header">
-                    <h2>Shopping Cart</h2>
-                </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered m-0">
@@ -137,26 +135,24 @@
                             </thead>
                             <tbody>
 
-                            <%cart['cart_items'].map(item => {%>
                             <tr>
                                 <td class="p-4">
                                     <div class="media align-items-center">
-                                        <img src="<%=item.image%>" class="d-block ui-w-40 ui-bordered mr-4" alt="">
+                                        <img src="" class="d-block ui-w-40 ui-bordered mr-4" alt="">
                                         <div class="media-body">
-                                            <a class="d-block text-dark"><%=item.name%></a>
+                                            <a class="d-block text-dark"></a>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-right font-weight-semibold align-middle p-4"><%=item.price%></td>
-                                <td class="align-middle p-4"><input type="text" class="form-control text-center" value="<%=item.quantity%>"></td>
-                                <td class="text-right font-weight-semibold align-middle p-4"><%=item.total_price_product%></td>
+                                <td class="text-right font-weight-semibold align-middle p-4"></td>
+                                <td class="align-middle p-4"><input type="text" class="form-control text-center" value=""></td>
+                                <td class="text-right font-weight-semibold align-middle p-4"></td>
                                 <td class="text-center align-middle px-0">
                                     <form action="" method="post">
-                                    <button class="shop-tooltip close float-none text-danger" onclick="return confirm('削除してもよろしいですか？')" name="idDelete" value="<%=item._id%>" data-original-title="Remove">×</button>
+                                    <button class="shop-tooltip close float-none text-danger" onclick="return confirm('削除してもよろしいですか？')" name="idDelete" value="" data-original-title="Remove">×</button>
                                     </form>
                                 </td>
                             </tr>
-                            <%})%>
                             </tbody>
                         </table>
                     </div>
@@ -169,18 +165,17 @@
                         <div class="d-flex">
                             <div class="text-right mt-4">
                                 <label class="text-muted font-weight-normal m-0">Total price</label>
-                                <div class="text-large"><strong><%=cart.total_price%></strong></div>
+                                <div class="text-large"><strong></strong></div>
                             </div>
                         </div>
                     </div>
-                    <div class="float-right">
-                        <a type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3" href="/users">Back to shopping</a>
-                        <form action="" method="post">
-                        <button type="submit" class="btn btn-lg btn-primary mt-2" name="cartId" value="<%=cart._id%>">Checkout</button>
-                        </form>
-                    </div>
                 </div>
             </div>
+            <br>
+
+
+
+
         </div>
     </div>
 </section>
@@ -194,7 +189,7 @@
                 <div class="footer_detail">
                     <a href="index.html">
                         <h4>
-                            Eatveg
+                            八百屋さん
                         </h4>
                     </a>
                     <p>

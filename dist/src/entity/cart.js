@@ -12,7 +12,11 @@ const CartSchema = new mongoose_1.Schema({
             quantity: Number,
             total_price_product: Number,
         }],
-    total_price: Number
+    total_price: Number,
+    paymentStatus: {
+        type: String,
+        enum: ['paid', 'unpaid']
+    }
 });
 const Cart = (0, mongoose_1.model)('Cart', CartSchema);
 exports.Cart = Cart;

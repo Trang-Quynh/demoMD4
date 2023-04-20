@@ -10,6 +10,7 @@ export interface ICart{
         total_price_product:number
     }],
     total_price: number;
+    paymentStatus:string
 }
 
 const CartSchema = new Schema<ICart>({
@@ -22,7 +23,11 @@ const CartSchema = new Schema<ICart>({
         quantity: Number,
         total_price_product:Number,
     }],
-    total_price: Number
+    total_price: Number,
+    paymentStatus: {
+        type: String,
+        enum: ['paid', 'unpaid']
+    }
 });
 
 const Cart = model('Cart', CartSchema);

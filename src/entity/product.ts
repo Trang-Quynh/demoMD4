@@ -16,6 +16,7 @@ const ProductSchema = new Schema<IProduct>({
         type:String,
         ref: 'Category'
     }
+
 })
 
 const Product = model('Product', ProductSchema);
