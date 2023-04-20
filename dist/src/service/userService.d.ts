@@ -34,6 +34,9 @@ declare class UserService {
     checkUser: (user: any) => Promise<import("mongoose").Document<unknown, any, import("../entity/user").IUser> & Omit<import("../entity/user").IUser & {
         _id: import("mongoose").Types.ObjectId;
     }, never>>;
+    checkPassword: (user: any) => Promise<import("mongoose").Document<unknown, any, import("../entity/user").IUser> & Omit<import("../entity/user").IUser & {
+        _id: import("mongoose").Types.ObjectId;
+    }, never>>;
     createUser: (user: any) => Promise<import("mongoose").Document<unknown, any, import("../entity/user").IUser> & Omit<import("../entity/user").IUser & {
         _id: import("mongoose").Types.ObjectId;
     }, never>>;

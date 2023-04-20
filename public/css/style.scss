@@ -470,10 +470,6 @@ a:focus {
     .detail-box {
       margin-top: 15px;
 
-      a {
-        font-size: 18px;
-        color: $black;
-      }
 
       .price_heading {
         margin-top: 10px;
@@ -703,7 +699,7 @@ a:focus {
 .footer_section {
   padding: 175px 0 25px 0;
   clip-path: polygon(0 0, 100% 25%, 100% 100%, 0 100%);
-  background-color: lighten($color: pink, $amount: 10);
+  background-color: #fff3cd;
   color: #fefefe;
 
   .footer-col {

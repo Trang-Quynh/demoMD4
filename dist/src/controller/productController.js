@@ -12,7 +12,7 @@ class ProductController {
                 let limit;
                 let offset;
                 if (!req.query.limit || !req.query.offset) {
-                    limit = 3;
+                    limit = 6;
                     offset = 0;
                 }
                 else {

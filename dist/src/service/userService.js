@@ -18,6 +18,10 @@ class UserService {
             let userFind = await user_1.User.findOne({ username: user.username, password: user.password });
             return userFind;
         };
+        this.checkPassword = async (user) => {
+            let check = await user_1.User.findOne({ password: user.password });
+            return check;
+        };
         this.createUser = async (user) => {
             let createdUser = await user_1.User.create(user);
             return createdUser;

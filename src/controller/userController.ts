@@ -22,7 +22,7 @@ class UserController{
         if (!user){
             res.redirect(301, '/users/login');
         }else{
-            if(user.username == 'sohee' && user.password == '123'){
+            if(user.username == 'sohee' && user.password == 'sohee'){
                 req.session['user'] = user;
                 res.redirect(301, '/products')
             }else{
@@ -36,7 +36,7 @@ class UserController{
             let limit: number;
             let offset: number;
             if(!req.query.limit || !req.query.offset) {
-                limit = 3;
+                limit = 6;
                 offset = 0;
             } else {
                 limit = parseInt(req.query.limit as string);
@@ -69,13 +69,16 @@ class UserController{
 
     signup = async (req:Request, res:Response) =>{
         let user = req.body;
-        try{
-           let currentUser =  await this.userService.createUser(user);
-           await this.cartService.createNewCart(currentUser._id);
-        }catch (err){
-            console.log(err.message)
-        }
-        res.redirect(301, '/users/login');
+            let check = await this.userService.checkPassword(user);
+            if(check){
+                res.redirect(301, '/users/signup');
+            }else if(!user.username || !user.password){
+                res.redirect(301, '/users/signup');
+            }else{
+                let currentUser =  await this.userService.createUser(user);
+                await this.cartService.createNewCart(currentUser._id);
+                res.redirect(301, '/users/login');
+            }
     }
 
     showShoppingCart = async (req:Request, res:Response) =>{

@@ -17,7 +17,7 @@ class UserController {
                 res.redirect(301, '/users/login');
             }
             else {
-                if (user.username == 'sohee' && user.password == '123') {
+                if (user.username == 'sohee' && user.password == 'sohee') {
                     req.session['user'] = user;
                     res.redirect(301, '/products');
                 }
@@ -32,7 +32,7 @@ class UserController {
                 let limit;
                 let offset;
                 if (!req.query.limit || !req.query.offset) {
-                    limit = 3;
+                    limit = 6;
                     offset = 0;
                 }
                 else {
@@ -65,14 +65,18 @@ class UserController {
         };
         this.signup = async (req, res) => {
             let user = req.body;
-            try {
+            let check = await this.userService.checkPassword(user);
+            if (check) {
+                res.redirect(301, '/users/signup');
+            }
+            else if (!user.username || !user.password) {
+                res.redirect(301, '/users/signup');
+            }
+            else {
                 let currentUser = await this.userService.createUser(user);
                 await this.cartService.createNewCart(currentUser._id);
+                res.redirect(301, '/users/login');
             }
-            catch (err) {
-                console.log(err.message);
-            }
-            res.redirect(301, '/users/login');
         };
         this.showShoppingCart = async (req, res) => {
             let user_id = req.session['user']._id;

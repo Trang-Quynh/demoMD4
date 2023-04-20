@@ -19,7 +19,7 @@ class ProductController{
               let limit: number;
               let offset: number;
               if(!req.query.limit || !req.query.offset) {
-                  limit = 3;
+                  limit = 6;
                   offset = 0;
               } else {
                   limit = parseInt(req.query.limit as string);

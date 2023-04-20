@@ -24,6 +24,21 @@
   <link href="css/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
+  <style>
+    a:hover{
+      color: white;
+    }
+    a{
+      color: #28A745;
+      font-size: 16px;
+      font-family: sans-serif;
+    }
+    #cus1, #cus2 {
+      height: 38px;
+      width: 85px;
+      text-align: center;
+    }
+  </style>
 </head>
 
 <body class="sub_page">
@@ -47,7 +62,7 @@
               <ul class="navbar-nav justify-content-between ">
                 <div class="User_option">
                   <form class="form-inline " method="get">
-                    <input type="search" id="search" name="search" class="form-control" placeholder="Search for products">
+                    <input type="search" id="search" name="search" class="form-control" placeholder="商品名で検索">
                   </form>
                 </div>
               </ul>
@@ -63,9 +78,10 @@
           </div>
           <div id="myNav" class="overlay">
             <div class="overlay-content">
-              <a href="/users/login">Login</a>
-              <a href="/users/signup">SignUp</a>
-              <a href="/logout">Logout</a>
+              <a href="/users/login">LOGIN</a>
+              <a href="/users/signup">SIGNUP</a>
+              <a href="/products/create">ADD NEW PRODUCT</a>
+              <a href="/logout">LOGOUT</a>
             </div>
           </div>
         </div>
@@ -109,10 +125,11 @@
     <div class="container">
       <div class="heading_container heading_center">
         <h2>
-          Our Vegetables
+          新着商品
         </h2>
         <p>
-          which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't an
+          やおやさんは全国の農家さんから直接やりとりしながら
+          食材を買えるオンラインマルシェです。
         </p>
       </div>
       <div class="row">
@@ -136,10 +153,10 @@
                 </h6>
               </div>
               <form action="" method="post">
-                <button class="btn btn-outline-success" onclick="return confirm('削除してもよろしいですか？')" name="idDelete" value="<%=product._id%>">Delete</button>
-              </form>
-              <form action="" method="post">
-                <button class="btn btn-outline-success" ><a href="products/update/<%=product._id%>">Update</a></button>
+                <button class="btn btn-outline-success" id = 'cus1' onclick="return confirm('削除してもよろしいですか？')" name="idDelete" value="<%=product._id%>">Delete</button>
+                <button class="btn btn-outline-success" id = 'cus2'>
+                  <a style="color: #28A745; font-size: 16px; font-family: Poppins, sans-serif;" href="products/update/<%=product._id%>">Update</a>
+                </button>
               </form>
             </div>
           </div>
@@ -156,12 +173,12 @@
                 <span aria-hidden="true">&laquo;</span>
               </a>
             </li>
-            <li class="page-item"><a class="page-link" href="http://localhost:3000/products?offset=0&limit=3">1</a></li>
-            <li class="page-item"><a class="page-link" href="http://localhost:3000/products?offset=1&limit=3">2</a></li>
-            <li class="page-item"><a class="page-link" href="http://localhost:3000/products?offset=2&limit=3">3</a></li>
-            <li class="page-item"><a class="page-link" href="http://localhost:3000/products?offset=3&limit=3">4</a></li>
-            <li class="page-item"><a class="page-link" href="http://localhost:3000/products?offset=4&limit=3">5</a></li>
-            <li class="page-item"><a class="page-link" href="http://localhost:3000/products?offset=5&limit=3">6</a></li>
+            <li class="page-item"><a class="page-link" href="http://localhost:3000/products?offset=0&limit=6">1</a></li>
+            <li class="page-item"><a class="page-link" href="http://localhost:3000/products?offset=1&limit=6">2</a></li>
+            <li class="page-item"><a class="page-link" href="http://localhost:3000/products?offset=2&limit=6">3</a></li>
+            <li class="page-item"><a class="page-link" href="http://localhost:3000/products?offset=3&limit=6">4</a></li>
+            <li class="page-item"><a class="page-link" href="http://localhost:3000/products?offset=4&limit=6">5</a></li>
+            <li class="page-item"><a class="page-link" href="http://localhost:3000/products?offset=5&limit=6">6</a></li>
             <li class="page-item">
               <a class="page-link" href="#" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
@@ -243,85 +260,85 @@
   <!-- end client section -->
 
   <!-- footer section -->
-  <section class="container-fluid footer_section">
-    <div class="container">
-      <div class="row ">
-        <div class="col-sm-6 col-md-4 col-lg-3 footer-col">
-          <div class="footer_detail">
-            <a href="index.html">
-              <h4>
-                Eatveg
-              </h4>
-            </a>
-            <p>
-              Soluta odit exercitationem rerum aperiam eos consectetur impedit delectus qui reiciendis, distinctio, asperiores fuga labore a? Magni natus.
-            </p>
-            <div class="social_box">
-              <a href="">
-                <i class="fa fa-facebook" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-twitter" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-linkedin" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-instagram" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-4 col-lg-3 mx-auto footer-col">
-          <h4>
-            Contact us
-          </h4>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit
-          </p>
-          <div class="contact_nav">
-            <a href="">
-              <i class="fa fa-map-marker" aria-hidden="true"></i>
-              <span>
-                Location
-              </span>
-            </a>
-            <a href="">
-              <i class="fa fa-phone" aria-hidden="true"></i>
-              <span>
-                Call : +01 123455678990
-              </span>
-            </a>
-            <a href="">
-              <i class="fa fa-envelope" aria-hidden="true"></i>
-              <span>
-                Email : demo@gmail.com
-              </span>
-            </a>
-          </div>
-        </div>
-        <div class="col-md-4 footer-col">
-          <div class="footer_form">
+<section class="container-fluid footer_section " >
+  <div class="container">
+    <div class="row ">
+      <div class="col-sm-6 col-md-4 col-lg-3 footer-col">
+        <div class="footer_detail">
+          <a href="index.html">
             <h4>
-              SIGN UP TO OUR NEWSLETTER
+              YAOYASAN
             </h4>
-            <form action="">
-              <input type="text" placeholder="Enter Your Email" />
-              <button type="submit">
-                Subscribe
-              </button>
-            </form>
+          </a>
+          <p>
+            生産者が直接購入者の自宅や送り先へ商品を直送することを特徴とする国内の産直ECサイトにおいて、プラットフォーム上で消費者が視認可能な生産者数が最大である。
+          </p>
+          <div class="social_box">
+            <a href="">
+              <i class="fa fa-facebook" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-twitter" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-linkedin" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-instagram" aria-hidden="true"></i>
+            </a>
           </div>
         </div>
       </div>
-      <div class="footer-info">
+      <div class="col-sm-6 col-md-4 col-lg-3 mx-auto footer-col">
+        <h4>
+          お問い合わせ
+        </h4>
         <p>
-          &copy; <span id="displayYear"></span> All Rights Reserved By
-          <a href="https://html.design/">Free Html Templates</a>
+          ベトナム最大級の産直サイト『YAOYASAN』登録生産者数No.1
         </p>
+        <div class="contact_nav">
+          <a href="">
+            <i class="fa fa-map-marker" aria-hidden="true"></i>
+            <span>
+                会社情報
+              </span>
+          </a>
+          <a href="">
+            <i class="fa fa-phone" aria-hidden="true"></i>
+            <span>
+                問い合わせ先 : +01 123455678990
+              </span>
+          </a>
+          <a href="">
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+            <span>
+                メールアドレス : demo@gmail.com
+              </span>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-4 footer-col">
+        <div class="footer_form">
+          <h4>
+            SIGN UP TO OUR NEWSLETTER
+          </h4>
+          <form action="">
+            <input type="text" placeholder="Enter Your Email" />
+            <button type="submit">
+              Subscribe
+            </button>
+          </form>
+        </div>
       </div>
     </div>
-  </section>
+    <div class="footer-info">
+      <p>
+        &copy; <span id="displayYear"></span> All Rights Reserved By
+        <a href="https://html.design/">YAOYASAN</a>
+      </p>
+    </div>
+  </div>
+</section>
   <!-- end  footer section -->
 
   <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
