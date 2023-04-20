@@ -19,19 +19,6 @@ class ProductService {
          return products;
     }
 
-    // db.posts.find({
-    //                   $or: [
-    //                       { "title": { "$regex": "mongodb", "$options": "i" } },
-    //                       { "content": { "$regex": "mongodb", "$options": "i" } }
-    //                   ]
-    //               })
-
-    // db.users.find({
-    //                   $or: [
-    //                       { "email": "example@gmail.com" },
-    //                       { "age": { $gte: 18 } }
-    //                   ]
-    //               })
 
     findById = async (id) => {
         let product = await Product.find({_id: id});

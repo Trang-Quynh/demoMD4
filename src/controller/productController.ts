@@ -14,17 +14,18 @@ class ProductController{
 
 
     showList = async (req:Request, res:Response) =>{
-          let limit: number;
-          let offset: number;
-          if(!req.query.limit || !req.query.offset) {
-              limit = 3;
-              offset = 0;
-          } else {
-              limit = parseInt(req.query.limit as string);
-              offset = parseInt(req.query.offset as string);
-          }
-          let products = '';
+
           if(req.session['user']){
+              let limit: number;
+              let offset: number;
+              if(!req.query.limit || !req.query.offset) {
+                  limit = 3;
+                  offset = 0;
+              } else {
+                  limit = parseInt(req.query.limit as string);
+                  offset = parseInt(req.query.offset as string);
+              }
+              let products = '';
               if(req.query.search){
                   let keyword = req.query.search.toString();
                   products = await this.productService.findByKeywordMongoo(keyword,limit,offset);

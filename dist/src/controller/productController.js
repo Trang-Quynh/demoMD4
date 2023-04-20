@@ -8,18 +8,18 @@ const categoryService_1 = __importDefault(require("../service/categoryService"))
 class ProductController {
     constructor() {
         this.showList = async (req, res) => {
-            let limit;
-            let offset;
-            if (!req.query.limit || !req.query.offset) {
-                limit = 3;
-                offset = 0;
-            }
-            else {
-                limit = parseInt(req.query.limit);
-                offset = parseInt(req.query.offset);
-            }
-            let products = '';
             if (req.session['user']) {
+                let limit;
+                let offset;
+                if (!req.query.limit || !req.query.offset) {
+                    limit = 3;
+                    offset = 0;
+                }
+                else {
+                    limit = parseInt(req.query.limit);
+                    offset = parseInt(req.query.offset);
+                }
+                let products = '';
                 if (req.query.search) {
                     let keyword = req.query.search.toString();
                     products = await this.productService.findByKeywordMongoo(keyword, limit, offset);

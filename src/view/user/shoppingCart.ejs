@@ -153,7 +153,7 @@
                                 <td class="text-right font-weight-semibold align-middle p-4"><%=item.total_price_product%></td>
                                 <td class="text-center align-middle px-0">
                                     <form action="" method="post">
-                                    <button class="shop-tooltip close float-none text-danger" name="idDelete" value="<%=item._id%>" data-original-title="Remove">×</button>
+                                    <button class="shop-tooltip close float-none text-danger" onclick="return confirm('削除してもよろしいですか？')" name="idDelete" value="<%=item._id%>" data-original-title="Remove">×</button>
                                     </form>
                                 </td>
                             </tr>

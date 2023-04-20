@@ -1,7 +1,7 @@
 $white: #ffffff;
 $black: #252525;
 $primary1: #b6eb7a;
-$primary2: #17706e;
+$primary2: #ffb6c1;
 
 
 @mixin main-font {
@@ -137,7 +137,6 @@ body {
       top: 0;
       width: 100%;
       height: 100%;
-      //background: linear-gradient(to right, rgba($color : $primary2, $alpha : 0.85), rgba($color : $primary2, $alpha : 0.45), rgba($color : $primary2, $alpha : 0.25));
     }
   }
 }
@@ -531,7 +530,6 @@ a:focus {
       top: 0;
       width: 100%;
       height: 100%;
-      //background: linear-gradient(to right, rgba($color : $primary2, $alpha : 0.1), rgba($color : $primary2, $alpha : 0.55), rgba($color : $primary2, $alpha : 0.85));
     }
   }
 
@@ -705,7 +703,7 @@ a:focus {
 .footer_section {
   padding: 175px 0 25px 0;
   clip-path: polygon(0 0, 100% 25%, 100% 100%, 0 100%);
-  background-color: darken($color: $primary2, $amount: 10);
+  background-color: lighten($color: pink, $amount: 10);
   color: #fefefe;
 
   .footer-col {
