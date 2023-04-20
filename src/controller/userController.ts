@@ -58,7 +58,6 @@ class UserController{
 
     addNewProduct = async (req:Request, res:Response) =>{
         let product_id = req.body.product_id;
-        console.log(product_id)
         let user_id = req.session['user']._id
         await this.userService.addToCart(user_id, product_id);
         res.redirect(301, `/users`)
@@ -82,8 +81,7 @@ class UserController{
     showShoppingCart = async (req:Request, res:Response) =>{
         let user_id = req.session['user']._id;
         let cart = await this.userService.findCartByUserId(user_id);
-        console.log(cart)
-            res.render('user/shoppingCart', {cart:cart});
+        res.render('user/shoppingCart', {cart:cart});
     }
 
     deleteACart_items = async (req:Request, res:Response, user_id, cartItem_id) =>{
@@ -92,7 +90,7 @@ class UserController{
     }
 
     paidCart = async (req:Request, res:Response, user_id, cartId) =>{
-        await cartService.removeToHistory(user_id, cartId)
+        await cartService.moveToHistory(user_id, cartId)
         res.redirect(301,'/users/shoppingCart');
     }
 
@@ -100,9 +98,6 @@ class UserController{
         let user_id = req.session['user']._id;
         let cartItem_id = req.body.idDelete
         let cartId = req.body.cartId
-        // console.log('cartItem_id' + cartItem_id)
-        // console.log('cartId' + cartId)
-        // console.log('userId' + user_id)
         if(cartItem_id){
             await this.deleteACart_items(req,res, user_id, cartItem_id)
         }else if(cartId){
@@ -113,16 +108,28 @@ class UserController{
     shoppingHistoryGet = async (req:Request, res:Response) =>{
         let user_id = req.session['user']._id;
         let carts = await this.userService.findPaidCartByUserId(user_id);
+
         console.log(carts)
-        // res.render('user/history');
+
+        // console.log(carts[0].cart.cart_items)
+        //
+        // for (let i = 0; i < carts.length; i++) {
+        //     for (let j = 0; j < ; j++) {
+        //
+        //     }
+        //
+        // }
+
+
+        res.render('user/history', {carts:carts});
     }
 
-
-
-
-
-
-
+    logOut = async (req:Request, res:Response) =>{
+            req.session.destroy(function() {
+            return res.status(200).json({status: 'success', session: 'cannot access session here'});
+       })
+        res.redirect(301,'/banrau');
+    }
 
 
 

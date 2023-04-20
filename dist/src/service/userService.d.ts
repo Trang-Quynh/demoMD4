@@ -39,7 +39,9 @@ declare class UserService {
     }, never>>;
     addToCart: (user_id: any, product_id: any) => Promise<void>;
     deleteItem: (user_id: any, cartItem_id: any) => Promise<void>;
-    findPaidCartByUserId: (user_id: any) => Promise<void>;
+    findPaidCartByUserId: (user_id: any) => Promise<Omit<import("mongoose").Document<unknown, any, import("../entity/history").IHistory> & Omit<import("../entity/history").IHistory & {
+        _id: import("mongoose").Types.ObjectId;
+    }, never>, never>[]>;
 }
 declare const _default: UserService;
 export default _default;

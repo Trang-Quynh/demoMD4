@@ -11,7 +11,7 @@ class UserService {
             return users;
         };
         this.findCartByUserId = async (user_id) => {
-            const cart = await cart_1.Cart.findOne({ user_id: user_id });
+            const cart = await cart_1.Cart.findOne({ user_id: user_id, paymentStatus: 'unpaid' });
             return cart;
         };
         this.checkUser = async (user) => {
@@ -23,7 +23,7 @@ class UserService {
             return createdUser;
         };
         this.addToCart = async (user_id, product_id) => {
-            const cart = await cart_1.Cart.findOne({ user_id: user_id });
+            const cart = await cart_1.Cart.findOne({ user_id: user_id, paymentStatus: 'unpaid' });
             const product = await product_1.Product.findById(product_id);
             if (!product) {
                 throw new Error('Product not found');
@@ -54,13 +54,13 @@ class UserService {
             await cart_1.Cart.updateOne({ _id: cart['_id'] }, {
                 $set: cart
             }).then(() => {
-                console.log('update success');
+                console.log('add a cart-item to cart success');
             }).catch((err) => {
                 console.log(err);
             });
         };
         this.deleteItem = async (user_id, cartItem_id) => {
-            const cart = await cart_1.Cart.findOne({ user_id: user_id });
+            const cart = await cart_1.Cart.findOne({ user_id: user_id, paymentStatus: 'unpaid' });
             await cart['cart_items'].map((value, index) => {
                 if (cart['cart_items'][index]['_id'] == cartItem_id) {
                     cart['cart_items'].splice(index, 1);
@@ -74,14 +74,14 @@ class UserService {
             await cart_1.Cart.updateOne({ _id: cart['_id'] }, {
                 $set: cart
             }).then(() => {
-                console.log('update success');
+                console.log('remove a cart-item success');
             }).catch((err) => {
                 console.log(err);
             });
         };
         this.findPaidCartByUserId = async (user_id) => {
-            let carts = await history_1.History.find({ user_id: user_id }).populate('Cart');
-            console.log(carts);
+            let carts = await history_1.History.find({ user_id: user_id, paymentStatus: 'paid' }).populate('cart');
+            return carts;
         };
     }
 }

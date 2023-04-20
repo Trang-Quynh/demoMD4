@@ -25,7 +25,7 @@
 import { Schema } from 'mongoose';
 import { ICart } from "./cart";
 export interface IHistory {
-    cart_id: ICart;
+    cart: ICart;
 }
 declare const History: import("mongoose").Model<IHistory, {}, {}, {}, Schema<IHistory, import("mongoose").Model<IHistory, any, any, any, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, IHistory>>;
 export { History };

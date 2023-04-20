@@ -1,10 +1,10 @@
 import {Schema, model} from 'mongoose'
 import {ICart} from "./cart";
 export interface IHistory{
-    cart_id: ICart
+    cart: ICart
 }
 const HistorySchema = new Schema<IHistory>({
-    cart_id: {
+    cart: {
         type:String,
         ref: 'Cart'
     }

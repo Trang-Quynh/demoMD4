@@ -56,7 +56,6 @@ class UserController {
         };
         this.addNewProduct = async (req, res) => {
             let product_id = req.body.product_id;
-            console.log(product_id);
             let user_id = req.session['user']._id;
             await this.userService.addToCart(user_id, product_id);
             res.redirect(301, `/users`);
@@ -78,7 +77,6 @@ class UserController {
         this.showShoppingCart = async (req, res) => {
             let user_id = req.session['user']._id;
             let cart = await this.userService.findCartByUserId(user_id);
-            console.log(cart);
             res.render('user/shoppingCart', { cart: cart });
         };
         this.deleteACart_items = async (req, res, user_id, cartItem_id) => {
@@ -86,7 +84,7 @@ class UserController {
             res.redirect(301, '/users/shoppingCart');
         };
         this.paidCart = async (req, res, user_id, cartId) => {
-            await cartService_1.default.removeToHistory(user_id, cartId);
+            await cartService_1.default.moveToHistory(user_id, cartId);
             res.redirect(301, '/users/shoppingCart');
         };
         this.shoppingCartPost = async (req, res) => {
@@ -104,6 +102,13 @@ class UserController {
             let user_id = req.session['user']._id;
             let carts = await this.userService.findPaidCartByUserId(user_id);
             console.log(carts);
+            res.render('user/history', { carts: carts });
+        };
+        this.logOut = async (req, res) => {
+            req.session.destroy(function () {
+                return res.status(200).json({ status: 'success', session: 'cannot access session here' });
+            });
+            res.redirect(301, '/banrau');
         };
         this.userService = userService_1.default;
         this.cartService = cartService_1.default;

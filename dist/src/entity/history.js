@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.History = void 0;
 const mongoose_1 = require("mongoose");
 const HistorySchema = new mongoose_1.Schema({
-    cart_id: {
+    cart: {
         type: String,
         ref: 'Cart'
     }

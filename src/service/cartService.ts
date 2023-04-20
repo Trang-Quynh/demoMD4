@@ -1,5 +1,6 @@
 import {Cart} from "../entity/cart";
 import {History} from "../entity/history";
+import userService from "./userService";
 
 
 class CartService {
@@ -16,7 +17,7 @@ class CartService {
             if (err) {
                 console.log(err);
             } else {
-                console.log('create success');
+                console.log('create new cart success');
             }
         });
     }
@@ -25,7 +26,7 @@ class CartService {
     // luu vao trong history
     saveToHistory = async (cart_id) => {
         await History.create({
-            cart_id: cart_id,
+            cart: cart_id,
         }, function(err) {
             if (err) {
                 console.log(err);
@@ -36,27 +37,39 @@ class CartService {
     }
 
     deleteACart = async (cart_id) => {
-        await Cart.deleteOne({
-            cart_id: cart_id,function(err) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log('delete success');
-                }
-            }
-        });
+        console.log('delete cart id ' + cart_id)
+        await Cart.deleteOne(
+            { cart_id: cart_id }
+        ).then(()=>{
+            console.log('delete success')
+        }).catch((err)=>{
+            console.log(err)
+        })
+
     }
 
-    removeToHistory = async (user_id, cart_id)=>{
-        //chuyen trang thai
-        Cart.updateOne(
-            {_id: cart_id},
-            {$set: { paymentStatus: "paid" }}
-        );
+    updateStatus = async (user_id, cart_id) => {
+        let cart = await userService.findCartByUserId(user_id);
+        cart['paymentStatus'] = "paid";
+        await Cart.updateOne(
+            { _id: cart_id },
+            {
+                $set: cart
+            }
+        ).then(()=>{
+            console.log('update success')
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }
+
+    moveToHistory = async (user_id, cart_id)=>{
+
+        await this.updateStatus(user_id, cart_id)
         // luu vao lich su
         await this.saveToHistory(cart_id);
         //xoa gio hang cu
-        await this.deleteACart(cart_id);
+        // await this.deleteACart(cart_id);
         //tao gio hang moi
         await this.createNewCart(user_id);
     }

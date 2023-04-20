@@ -15,6 +15,7 @@ declare class UserController {
     paidCart: (req: Request, res: Response, user_id: any, cartId: any) => Promise<void>;
     shoppingCartPost: (req: Request, res: Response) => Promise<void>;
     shoppingHistoryGet: (req: Request, res: Response) => Promise<void>;
+    logOut: (req: Request, res: Response) => Promise<void>;
 }
 declare const _default: UserController;
 export default _default;
